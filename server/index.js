@@ -3,11 +3,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
-import { Image, ImageKitProvider } from "@imagekit/react";
-import Images from "./models/Image.js";
 import { addImage, getImages } from "./controllers/Images.js";
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 const connectDB = async () => {
   const conn = await mongoose.connect(process.env.MONGODB_URL);
@@ -23,7 +22,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/users", getImages);
+app.get("/images", getImages);
 
 app.post("/images", addImage);
 

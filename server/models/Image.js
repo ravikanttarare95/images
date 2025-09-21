@@ -1,9 +1,9 @@
 import { model, Schema } from "mongoose";
 
-const userSchema = new Schema({
-  image: { type: String },
+const imageSchema = new Schema({
+  imageURL: { type: String },
 });
 
-const Image = model("Image", userSchema);
+const Image = model("Image", imageSchema);
 
 export default Image;
