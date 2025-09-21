@@ -1,8 +1,20 @@
 import Image from "./../models/Image.js";
+import photokit from "./../configs/Photokit.js";
 
 const addImage = async (req, res) => {
-  const { imageURL } = req.body;
-  const newImage = new Image({ imageURL });
+  const file = req.file;
+  if (!file) {
+    return res
+      .status(400)
+      .json({ success: false, message: "No file uploaded" });
+  }
+
+  const uploadResponse = await photokit.upload({
+    file: file.buffer.toString("base64"),
+    fileName: file.originalname,
+  });
+
+  const newImage = new Image({ file: uploadResponse.url });
   await newImage.save();
   res.json({
     success: true,
