@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
+import { Image, ImageKitProvider } from "@imagekit/react";
+import Images from "./models/Image.js";
+import { addImage, getImages } from "./controllers/Images.js";
 
 const app = express();
 app.use(cors());
@@ -12,6 +15,17 @@ const connectDB = async () => {
     console.log(`📶 MonogoDB connected. \n`);
   }
 };
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Server is Healthy",
+  });
+});
+
+app.get("/users", getImages);
+
+app.post("/images", addImage);
 
 const PORT = process.env.PORT || 8080;
 
