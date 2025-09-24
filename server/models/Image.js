@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const imageSchema = new Schema({
-  file: { type: String },
+  imageURL: { type: String },
 });
 
 const Image = model("Image", imageSchema);

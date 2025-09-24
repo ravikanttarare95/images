@@ -3,6 +3,8 @@ import photokit from "./../configs/Photokit.js";
 
 const addImage = async (req, res) => {
   const file = req.file;
+  // req.file does not exist in plain Express.
+  
   if (!file) {
     return res
       .status(400)
@@ -13,8 +15,9 @@ const addImage = async (req, res) => {
     file: file.buffer.toString("base64"),
     fileName: file.originalname,
   });
+  // console.log(uploadResponse);
 
-  const newImage = new Image({ file: uploadResponse.url });
+  const newImage = new Image({ imageURL: uploadResponse.url });
   await newImage.save();
   res.json({
     success: true,

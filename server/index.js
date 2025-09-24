@@ -31,6 +31,8 @@ app.get("/images", getImages);
 
 app.post("/images", upload.single("file"), addImage);
 
+// "file" -> check for key of file defined before sending to HTTP URL
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
